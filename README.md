@@ -1,6 +1,6 @@
 # ssh-switcher
 
-Bash utility to save and load your `~/.ssh/id_rsa.pub` and `~/.ssh/id_rsa` file
+Bash utility to save and load your `~/.ssh/id_*` files
 
 Supports linux & windows (with git bash)
 
@@ -11,7 +11,7 @@ App data will be saved to `~/.config/ssh-switcher/`
 ```sh
 Usage: ssh-switcher.sh [-h] [-v] <subcommand>
 
-Switch your ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa file with ease
+Switch your ~/.ssh/id_* files with ease
 
 Commands:
     save   <name>    Save ssh key files
@@ -28,6 +28,12 @@ Available options:
 ## Installation Reference
 
 Just for reference, since you might want to install to another path
+
+```sh
+# example
+mkdir -p ~/.config/ssh-switcher/script
+curl -fLk https://raw.githubusercontent.com/YieldRay/ssh-switcher/main/ssh-switcher.sh > ~/.config/ssh-switcher/script/ssh-switcher
+```
 
 ### linux
 

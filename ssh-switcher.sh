@@ -11,7 +11,7 @@ Usage: $(
         basename "${BASH_SOURCE[0]}"
     ) [-h] [-v] <subcommand>
 
-Switch your ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa file with ease
+Switch your ~/.ssh/id_* files with ease
 
 Commands:
     save   <name>    Save ssh key files
