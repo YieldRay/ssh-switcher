@@ -15,12 +15,11 @@ Usage: $(
 Switch your ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa file with ease
 
 Commands:
-    save   <name> [<email>]   Save ssh key files
-    load   <name> [-git|-a]   Load saved files
-    remove <name>             Remove saved files
-    list                      List saved files with name
-    whoami                    Show current name
-    git-config                Show git global config
+    save      <name> [<email>]     Save ssh key files
+    load      <name> [-git | -a]   Load saved files
+    remove/rm <name>               Remove saved files
+    list/ls                        List saved files with name
+    whoami                         Show current name
 
 Available options:
 -h, --help      Print this help and exit
@@ -142,12 +141,20 @@ load_git_config() {
 
 }
 
+print_git_config() {
+    if command -v git &>/dev/null; then
+        echo
+        msg "${ORANGE}user.name${NOFORMAT}  ${PURPLE}=${NOFORMAT} $(git config --global user.name)"
+        msg "${ORANGE}user.email${NOFORMAT} ${PURPLE}=${NOFORMAT} $(git config --global user.email)"
+    fi
+}
+
 subcommand_load() {
     # flag: --git
     if [[ -n "${1-}" && -n "${2-}" && "$2" == "-git" ]]; then
         load_git_config "$1"
         msg "${GREEN}Successfully loaded git config for \`$1\`${NOFORMAT}"
-        subcommand_git_config
+        print_git_config
         exit
     fi
 
@@ -183,8 +190,9 @@ subcommand_load() {
     # flag: -a
     if [[ -n "${1-}" && -n "${2-}" && "$2" == "-a" ]]; then
         load_git_config "$1"
-        subcommand_git_config
     fi
+
+    print_git_config
 }
 
 subcommand_remove() {
@@ -252,12 +260,9 @@ subcommand_whoami() {
         current=$(cat "$DATA_DIR/__current__")
         name=$(echo "$current" | cut -d' ' -f1)
     fi
-    msg "$name"
-}
+    msg "${CYAN}${name}${NOFORMAT}"
 
-subcommand_git_config() {
-    git config --global user.name
-    git config --global user.email
+    print_git_config
 }
 
 case ${args[0]} in
@@ -268,8 +273,6 @@ case ${args[0]} in
 "list") subcommand_list ;;
 "ls") subcommand_list ;;
 "whoami") subcommand_whoami ;;
-"git-config") subcommand_git_config ;;
-"git_config") subcommand_git_config ;;
 *)
     msg "${RED}Unknown command${NOFORMAT}"
     echo

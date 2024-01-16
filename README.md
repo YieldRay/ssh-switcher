@@ -11,14 +11,14 @@ App data will be saved to `~/.config/ssh-switcher/`
 ```sh
 Usage: ssh-switcher.sh [-h] [-v] <subcommand>
 
-Switch your ~/.ssh/id_* files with ease
+Switch your ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa file with ease
 
 Commands:
-    save   <name>    Save ssh key files
-    load   <name>    Load saved files
-    remove <name>    Remove saved files
-    list             List saved files with name
-    whoami           Show current name
+    save      <name> [<email>]     Save ssh key files
+    load      <name> [-git | -a]   Load saved files
+    remove/rm <name>               Remove saved files
+    list/ls                        List saved files with name
+    whoami                         Show current name
 
 Available options:
 -h, --help      Print this help and exit
