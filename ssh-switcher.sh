@@ -241,9 +241,9 @@ subcommand_list() {
 
             find "$dir" -name "id_*.pub" -type f | while read -r file; do
                 if [[ "$(basename "$file")" =~ id_(.+)\.pub ]]; then
-                    type=${BASH_REMATCH[1]}           # profile type
-                    name=$(basename "$dir")           # profile name
-                    title=$(cut -d ' ' -f 3 <"$file") # profile title
+                    type=${BASH_REMATCH[1]}                        # profile type
+                    name=$(basename "$dir")                        # profile name
+                    title=$(tr -d '\r' <"$file" | cut -d ' ' -f 3) # profile title
                     printf "%16s %25s %6s %25s\n" "$name" "$title" "$type" "$email"
                     break # only print the first ssh pub key
                 fi
