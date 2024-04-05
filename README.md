@@ -15,7 +15,7 @@ Switch your ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa file with ease
 
 Commands:
     save      <name> [<email>]     Save ssh key files
-    load      <name> [-git | -a]   Load saved files
+    load      <name> [--no-git]    Load saved files
     remove/rm <name>               Remove saved files
     list/ls                        List saved files with name
     whoami                         Show current name
@@ -23,6 +23,10 @@ Commands:
 Available options:
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
+
+Recommendations:
+name should be `git config --global user.name`
+email should be `git config --global user.email`
 ```
 
 ## Installation Reference
@@ -33,6 +37,7 @@ Just for reference, since you might want to install to another path
 # example
 mkdir -p ~/.config/ssh-switcher/script
 curl -fLk https://raw.githubusercontent.com/YieldRay/ssh-switcher/main/ssh-switcher.sh > ~/.config/ssh-switcher/script/ssh-switcher
+export PATH="$PATH:$HOME/.config/ssh-switcher/script/"
 ```
 
 ### linux

@@ -16,7 +16,7 @@ Switch your ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa file with ease
 
 Commands:
     save      <name> [<email>]     Save ssh key files
-    load      <name> [-git | -a]   Load saved files
+    load      <name> [--no-git]    Load saved files
     remove/rm <name>               Remove saved files
     list/ls                        List saved files with name
     whoami                         Show current name
@@ -24,6 +24,10 @@ Commands:
 Available options:
 -h, --help      Print this help and exit
 -v, --verbose   Print script debug info
+
+Recommendations:
+name should be \`git config --global user.name\`
+email should be \`git config --global user.email\`
 EOF
     exit
 }
@@ -150,14 +154,6 @@ print_git_config() {
 }
 
 subcommand_load() {
-    # flag: --git
-    if [[ -n "${1-}" && -n "${2-}" && "$2" == "-git" ]]; then
-        load_git_config "$1"
-        msg "${GREEN}Successfully loaded git config for \`$1\`${NOFORMAT}"
-        print_git_config
-        exit
-    fi
-
     # verify args
     if [[ -z "${1-}" ]]; then
         msg "${RED}Should provide a name${NOFORMAT}"
@@ -187,8 +183,8 @@ subcommand_load() {
     echo -n "$1" >"$DATA_DIR/__current__"
     msg "${GREEN}Successfully loaded \`$1\`${NOFORMAT}"
 
-    # flag: -a
-    if [[ -n "${1-}" && -n "${2-}" && "$2" == "-a" ]]; then
+    # flag: --no-git
+    if [[ -n "${1-}" && (-z "${2-}" || "$2" != "--no-git") ]]; then
         load_git_config "$1"
     fi
 
