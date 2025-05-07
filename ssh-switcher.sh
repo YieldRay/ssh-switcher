@@ -270,6 +270,11 @@ case ${args[0]} in
 "ls") subcommand_list ;;
 "whoami") subcommand_whoami ;;
 *)
+    # when subcommand cannot be recognized, let the subcommand be the name and try the load subcommand
+    if [ -d "$DATA_PROFILE_DIR/${args[0]}" ]; then
+        subcommand_load "${args[@]}"
+        exit 0
+    fi
     msg "${RED}Unknown command${NOFORMAT}"
     echo
     usage

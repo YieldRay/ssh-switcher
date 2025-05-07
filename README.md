@@ -1,6 +1,6 @@
 # ssh-switcher
 
-Bash utility to save and load your `~/.ssh/id_*` files
+Bash utility script to save and load your `~/.ssh/id_*` files
 
 Supports linux & windows (with git bash)
 
@@ -51,4 +51,4 @@ Download `ssh-switcher.sh` and `ssh-switcher.cmd` and move them to `%USERPROFILE
 Run `systempropertiesadvanced.exe` to modify your `PATH` environment variable, done!
 
 > You need have [`git for windows`](https://gitforwindows.org/) pre-installed, which ships an `bash.exe` executable  
-> If you installed `git for windows` with a custom path, edit `ssh-switcher.cmd` file
+> If you installed `git for windows` with a custom path, remember to edit the `ssh-switcher.cmd` file
